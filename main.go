@@ -23,6 +23,12 @@ func init() {
 }
 
 func main() {
+	// feed, err := utils.UrlToFeed("https://blog.boot.dev/index.xml")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// fmt.Println(feed)
+
 	portStr, exists := os.LookupEnv("PORT")
 	if !exists {
 		log.Fatal("PORT not found in .env file")
