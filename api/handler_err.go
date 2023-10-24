@@ -3,9 +3,9 @@ package api
 import (
 	"net/http"
 
-	"github.com/Jhnvlglmlbrt/rss-aggregator/usecase"
+	"github.com/Jhnvlglmlbrt/rss-aggregator/utils"
 )
 
 func HandlerErr(w http.ResponseWriter, r *http.Request) {
-	usecase.RespondWithError(w, 400, "Something went wrong")
+	utils.RespondWithError(w, 400, "Something went wrong")
 }

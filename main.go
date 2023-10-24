@@ -1,15 +1,19 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/Jhnvlglmlbrt/rss-aggregator/api"
+	"github.com/Jhnvlglmlbrt/rss-aggregator/internal/database"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
+
+	_ "github.com/lib/pq"
 )
 
 func init() {
@@ -22,6 +26,20 @@ func main() {
 	portStr, exists := os.LookupEnv("PORT")
 	if !exists {
 		log.Fatal("PORT not found in .env file")
+	}
+
+	dbURL, exists := os.LookupEnv("DB_URL")
+	if !exists {
+		log.Fatal("dbURL not found in .env file")
+	}
+
+	conn, err := sql.Open("postgres", dbURL)
+	if err != nil {
+		log.Fatal("Can't connect to database ", err)
+	}
+
+	apiCfg := api.ApiConfig{
+		DB: database.New(conn),
 	}
 
 	router := chi.NewRouter()
@@ -41,6 +59,16 @@ func main() {
 	v1Router.Get("/ready", api.HandlerReadiness)
 	v1Router.Get("/err", api.HandlerErr)
 
+	v1Router.Post("/users", apiCfg.HandlerCreateUser)
+	v1Router.Get("/users", apiCfg.MiddlewareAuth(apiCfg.HandlerGetUser))
+
+	v1Router.Post("/feeds", apiCfg.MiddlewareAuth(apiCfg.HandlerCreateFeed))
+	v1Router.Get("/feeds", (apiCfg.HandlerGetFeeds))
+
+	v1Router.Post("/feed_follows", apiCfg.MiddlewareAuth(apiCfg.HandlerCreateFeedFollow))
+	v1Router.Get("/feed_follows", apiCfg.MiddlewareAuth(apiCfg.HandlerGetFeedFollows))
+	v1Router.Delete("/feed_follows/{feedFollowID}", apiCfg.MiddlewareAuth(apiCfg.HandlerDeleteFeedFollow))
+
 	router.Mount("/v1", v1Router)
 
 	srv := &http.Server{
@@ -50,7 +78,7 @@ func main() {
 
 	log.Printf("Server starting on port %v", portStr)
 
-	err := srv.ListenAndServe()
+	err = srv.ListenAndServe()
 	if err != nil {
 		log.Fatal(err)
 	}

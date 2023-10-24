@@ -3,9 +3,9 @@ package api
 import (
 	"net/http"
 
-	"github.com/Jhnvlglmlbrt/rss-aggregator/usecase"
+	"github.com/Jhnvlglmlbrt/rss-aggregator/utils"
 )
 
 func HandlerReadiness(w http.ResponseWriter, r *http.Request) {
-	usecase.RespondWithJson(w, 200, struct{}{})
+	utils.RespondWithJson(w, 200, struct{}{})
 }
