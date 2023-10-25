@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/Jhnvlglmlbrt/rss-aggregator/api"
 	"github.com/Jhnvlglmlbrt/rss-aggregator/internal/database"
@@ -44,9 +45,12 @@ func main() {
 		log.Fatal("Can't connect to database ", err)
 	}
 
+	db := database.New(conn)
 	apiCfg := api.ApiConfig{
-		DB: database.New(conn),
+		DB: db,
 	}
+
+	go api.StartScraping(db, 10, time.Minute)
 
 	router := chi.NewRouter()
 
