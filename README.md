@@ -1,7 +1,7 @@
-<p align="center">
+<!-- <p align="center">
 <img src="https://pepy.tech/badge/rss-aggregator" alt="https://pepy.tech/project/rss-aggregator">
 <img src="https://pepy.tech/badge/rss-aggregator/month" alt="https://pepy.tech/project/rss-aggregator">
-<img src="https://img.shields.io/github/license/Jhnvlglmlbrt/rss-aggregator.svg" alt="https://github.com/Jhnvlglmlbrt/rss-aggregator/blob/master/LICENSE">
+<img src="https://img.shields.io/github/license/Jhnvlglmlbrt/rss-aggregator.svg" alt="https://github.com/Jhnvlglmlbrt/rss-aggregator/blob/master/LICENSE"> -->
 
 # ⚙️ Rss feed aggregator
 
@@ -14,12 +14,10 @@
 ## ⚠️ Requirements
 
 - .env 
-
-```
-PORT=8080
-DB_URL=postgres://postgres:Username@localhost:5432/dbname?sslmode=disable
-
-```
+    ```
+    PORT=8080
+    DB_URL=postgres://postgres:Username@localhost:5432/dbname?sslmode=disable
+    ```
 
 ## 💿 Installation
 
@@ -31,7 +29,7 @@ cd ../../ && make run
 
 <!-- ## 💻 Example -->
 
- <!-- ## 🪛 How to use?
+<!-- ## 🪛 How to use?
 
 - **request_method** -  is a callable (like app.get, app.post, foo_router.patch and so on.).  
 - **service_url** - the path to the endpoint on another service (like "https://microservice1.example.com").  
