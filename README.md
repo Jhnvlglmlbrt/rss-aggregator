@@ -43,6 +43,6 @@ For example, your gateway api is located here - *https://gateway.example.com* an
 - **override_headers** - Boolean value allows you to return all the headlines that were created by microservice in gateway.  
 - **query_params** - used to extract query parameters from endpoint and transmission to microservice
 - **form_params** -  used to extract form model parameters from endpoint and transmission to microservice
-- **param body_params** - used to extract body model from endpoint and transmission to microservice -->
+- **param body_params** - used to extract body model from endpoint and transmission to microservice
 
-<!-- ⚠️ - **Be sure to transfer the name of the argument to the router, which is in the endpoint func!**   --> -->
+⚠️ - **Be sure to transfer the name of the argument to the router, which is in the endpoint func!**  -->
