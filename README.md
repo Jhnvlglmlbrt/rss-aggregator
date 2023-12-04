@@ -34,6 +34,61 @@ cd sql/schema && goose postgres postgres://postgres:Username@localhost:5432/dbna
 cd ../../ && make run
 ```
 
+## Queries
+
+### /users
+
+- **GET:** `http://[::1]:8080/v1/users`
+    ```
+    Authorization: ApiKey userApiKey
+    ```
+
+- **POST:** `http://[::1]:8080/v1/users`
+    ```json example
+    {
+      "name": "Bob"
+    }
+    ```
+
+### /feeds 
+
+- **GET:** `http://[::1]:8080/v1/feeds`
+
+- **POST:** `http://[::1]:8080/v1/feeds`
+    ```json example
+    {
+      "name":"CrimeJunky",
+      "url":"https://feeds.simplecast.com/qm_9xx0g" 
+    }
+    ```
+    ```Headers
+    Authorization: ApiKey userApiKey
+    ```
+
+### /feed_follows
+
+- **GET:** `http://[::1]:8080/v1/feed_follows`
+
+- **POST:** `http://[::1]:8080/v1/feeds`
+    ```json example
+    {
+     "feed_id" : "94687cb3-5403-4b54-84a2-7bcfbb100faf" 
+    }
+    ```
+
+- **DELETE:** `http://[::1]:8080/v1/feed_follows/{feedFollowID}`
+
+
+     ```Headers
+    Authorization: ApiKey userApiKey
+    ```
+
+### /posts
+
+- **GET:** `http://[::1]:8080/v1/posts`
+    ```Headers
+    Authorization: ApiKey userApiKey
+    ```
 
 <!-- - **request_method** -  is a callable (like app.get, app.post, foo_router.patch and so on.).  
 - **service_url** - the path to the endpoint on another service (like "https://microservice1.example.com").  
